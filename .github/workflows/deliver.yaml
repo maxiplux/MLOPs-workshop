@@ -7,22 +7,22 @@ on:
 
 env:
   AWS_REGION: ca-central-1
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dockerhub Login
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - uses: actions/checkout@v2
-      - name: list files
-        run: ls -l
-      - name: Build image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/sklearn_flask:latest -f Dockerfile .
-      - name: Push image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sklearn_flask:latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Dockerhub Login
+#         uses: docker/login-action@v2
+#         with:
+#           username: ${{ secrets.DOCKERHUB_USERNAME }}
+#           password: ${{ secrets.DOCKERHUB_TOKEN }}
+#       - uses: actions/checkout@v2
+#       - name: list files
+#         run: ls -l
+#       - name: Build image
+#         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/sklearn_flask:latest -f Dockerfile .
+#       - name: Push image
+#         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sklearn_flask:latest
   
   # in_place_deploy:
   #   runs-on: ubuntu-latest
