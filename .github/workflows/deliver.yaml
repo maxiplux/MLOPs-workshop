@@ -34,6 +34,7 @@ jobs:
           key: ${{secrets.SSH_PRIVATE_KEY}}
           username: ${{secrets.USER}}
           script: |
+            whoami
             echo "Pull the latest image"
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/sklearn_flask:latest
             echo "Stop and remove container"
