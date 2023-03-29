@@ -1,8 +1,4 @@
 version: 0.0
 os: linux
 
-hooks:
-  ApplicationStart:
-    - location: aws/scripts/ApplicationStart.sh
-      timeout: 300
-      runas: root
+
