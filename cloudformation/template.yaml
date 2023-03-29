@@ -413,13 +413,16 @@ Resources:
               yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
               systemctl enable amazon-ssm-agent
               systemctl start amazon-ssm-agent
+              sudo -i -u ec2-user bash <<EOF
+              docker run -d -p 8000:8000 --name sklearn_flask junglepolice/sklearn_flask:latest
+              EOF
       KeyName: !Ref KeyName
 
   AutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
       HealthCheckType: ELB
-      HealthCheckGracePeriod: 300
+      HealthCheckGracePeriod: 1800
       DesiredCapacity: !Ref AutoScalingGroupDesiredCapacity
       MinSize: !Ref AutoScalingGroupMinSize
       MaxSize: !Ref AutoScalingGroupMaxSize
@@ -462,7 +465,7 @@ Resources:
       HealthCheckIntervalSeconds: 10
       UnhealthyThresholdCount: 2
       HealthyThresholdCount: 2
-      HealthCheckPath: "/"
+      HealthCheckPath: "/info"
       Port: 8000
       Protocol: HTTP
       VpcId: !Ref VPC
