@@ -242,7 +242,7 @@ In the lab both 2 deployments will be shown.
 When you are using one of the deployment method, please comment out the other one.
 
 # Steps
-Please store your dockerhub token and your dockerhub username in the repo Settings -> Secrets and variables -> actions-> secrets.
+Please store your dockerhub token and your dockerhub username in the repo Settings -> Secrets and variables -> actions-> secrets. By default the image will be pushed to https://hub.docker.com/r/junglepolice/sklearn_flask. If you'd like to use your own Dockerhub account to store the image, make sure you update the code in `./aws/scripts/ApplicationStart.sh` and the variable `DockerhubUsername` in the Cloudformation Stack when it is being launched. The `./aws/scripts/ApplicationStart.sh` is a hook file that will be executed in the ApplicationStart stage of the AWS CodeDeploy lifesycle. It stops the running container and create a new container with the latest Docker image.
 
 When you are using the in place deployment method, please have an ec2 instance ready with docker installed and configured. Then store the username, the IP address and content of the pem file of the ec2 in repository secrets.
 

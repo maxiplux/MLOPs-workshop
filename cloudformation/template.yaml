@@ -85,6 +85,10 @@ Parameters:
     Type: AWS::EC2::KeyPair::KeyName
     Default: bmo
     ConstraintDescription: must be the name of an existing EC2 KeyPair.
+  DockerhubUsername:
+    Type: String
+    Default: junglepolice
+    Description: Dockerhub username
 
 Resources:
   VPC:
@@ -414,7 +418,7 @@ Resources:
               systemctl enable amazon-ssm-agent
               systemctl start amazon-ssm-agent
               sudo -i -u ec2-user bash <<EOF
-              docker run -d -p 8000:8000 --name sklearn_flask junglepolice/sklearn_flask:latest
+              docker run -d -p 8000:8000 --name sklearn_flask ${DockerhubUsername}/sklearn_flask:latest
               EOF
       KeyName: !Ref KeyName
 
