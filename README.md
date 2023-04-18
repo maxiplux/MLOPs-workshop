@@ -234,75 +234,13 @@ For example, you can use it to refer to the secret variables you stored in the G
 # Deploy
 
 The Github Actions will be triggered when the code is pushed to the git repo.
-There are 1 build job and 2 jobs about depoyment.
-The build job builds a docker image and push it to my Dockerhub registry
-One of the deployment is in-place deploy, which would cause a short down time of the application.
-The other deployment method is blue-green through AWS CodeDeploy, which is more complicated but it does not have a down time.
-In the lab both 2 deployments will be shown.
-When you are using one of the deployment method, please comment out the other one.
+
+The build job builds a docker image and push it to my Dockerhub registry.
+
+The deployment is in-place deploy, which would cause a short down time of the application.
+
 
 # Steps
-Please store your dockerhub token and your dockerhub username in the repo Settings -> Secrets and variables -> actions-> secrets. By default the image will be pushed to https://hub.docker.com/r/junglepolice/sklearn_flask. If you'd like to use your own Dockerhub account to store the image, make sure you update the code in `./aws/scripts/ApplicationStart.sh` and the variable `DockerhubUsername` in the Cloudformation Stack when it is being launched. The `./aws/scripts/ApplicationStart.sh` is a hook file that will be executed in the ApplicationStart stage of the AWS CodeDeploy lifesycle. It stops the running container and create a new container with the latest Docker image.
+
 
 When you are using the in place deployment method, please have an ec2 instance ready with docker installed and configured. Then store the username, the IP address and content of the pem file of the ec2 in repository secrets.
-
-
-When you are using the blue green deployment method to deploy your application, please create a new stack in the AWS CloudFormation with the template.yaml file in the cloudformation folder of this repository. The KeyName and Stack name can be customized but the other parameters have to kept as default when you are configuring the CloudFormation template parameters.
-
-![](./images/MLOPS.png)
-The cloud formation will cerate a VPC, a launch configuration file, an autoscaling group, an AWS Codedeploy service and some necessary roles.
-![](./images/MLOPS-Cloudformation-Resources.png)
-
-On the AWS CloudFormation console, select the Outputs tab. Note that the ARN of the GitHub IAM Role will be used in the next step.
-![](./images/CloudFormationOutput.png)
-
-Copy the value of this ARN. Then go to your Github repository, create a new secret called IAMROLE_GITHUB and paste the ARN as the content of the secret.
-![](./images/Secrets.png)
-
-## Integrate CodeDeploy with GitHub:
-For CodeDeploy to be able to perform deployment steps using scripts in your repository, it must be integrated with GitHub.
-
-CodeDeploy application and deployment group are already created for you.
-
-Sign in to the AWS Management Console and open the CodeDeploy console at https://console.aws.amazon.com/codedeploy.
-
-
-In the navigation pane, expand Deploy, then choose Applications.
-
-Choose the application CodeDeployAppNameWithASG to link to a different GitHub account.
-
-Choose CodeDeployGroupName
-
-Click on Create deployment.
-
-In Deployment settings, for Revision type, choose My application is stored in GitHub.
-
-To create a connection for AWS CodeDeploy applications to a GitHub account, sign out of GitHub in a separate web browser tab. In GitHub token name, type a name to identify this connection, and then choose Connect to GitHub. The web page prompts you to authorize CodeDeploy to interact with GitHub for your application. 
-
-![](./images/IntegrateCodeDeployWithGithub.png)
-
-Choose Authorize application. GitHub gives CodeDeploy permission to interact with GitHub on behalf of the signed-in GitHub account for the selected application.
-
-Choose cancel because we don't want to create a deployment
-
-Go back to the application CodeDeployGroupName, click on edit
-
-Choose Blue/Green in Deployment type
-![](./images/DeploymentType.png)
-
-choose the target group created by the cloudformation stack
-![](./images/LoadBalancer.png)
-
-Click on Save changes
-
-Push your code to the Github to trigger the workflow
-
-In order to see if the deployment works, copy the value of the WebappUrl from the cloudformation stack template, enter the value + `/info` in your broweser.
-
-# Clean Up
-- Delete the cloudformation stack in your AWS Console.
-- Delete the autocaling group created by AWS in EC2 service
-
-# Reference
-- https://aws.amazon.com/blogs/devops/integrating-with-github-actions-ci-cd-pipeline-to-deploy-a-web-app-to-amazon-ec2/
-- https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-partners-github.html#behaviors-authentication
