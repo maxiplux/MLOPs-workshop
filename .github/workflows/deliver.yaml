@@ -2,7 +2,7 @@ name: build, push and deploy
 on:
   push:
     branches:
-      - main
+      - blue-green-deployment
   pull_request:
 
 env:
