@@ -30,7 +30,7 @@ jobs:
     needs: build
     steps:
       - name: Deploy to server
-        uses: appleboy/ssh-action@v0.1.9
+        uses: appleboy/ssh-action@master
         # https://github.com/marketplace/actions/ssh-remote-commands
         with:
           host: ${{secrets.HOST}}
