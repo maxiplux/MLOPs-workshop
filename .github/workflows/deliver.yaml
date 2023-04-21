@@ -47,7 +47,7 @@ jobs:
   #           docker run -d -p 8000:8000 --name sklearn_flask ${{ secrets.DOCKERHUB_USERNAME }}/sklearn_flask:latest
   AWSCodeDeploy-Deploy:
     runs-on: ubuntu-latest
-    # needs: build
+    needs: build
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
       id-token: write
