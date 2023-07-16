@@ -78,7 +78,7 @@ Parameters:
     Description: A thumbprint of an Open ID Connector is a SHA1 hash of the public certificate of the host
   GithubRepoName:
     Type: String
-    Default: beam-data/mlops
+    Default: davyzhang3/GithubActionsExample
     Description: GitHub repository name Ex-TestUser/TestCodeDeploy
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instances

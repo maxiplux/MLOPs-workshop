@@ -247,7 +247,7 @@ Please store your dockerhub token and your dockerhub username in the repo Settin
 When you are using the in place deployment method, please have an ec2 instance ready with docker installed and configured. Then store the username, the IP address and content of the pem file of the ec2 in repository secrets.
 
 
-When you are using the blue green deployment method to deploy your application, please create a new stack in the AWS CloudFormation with the template.yaml file in the cloudformation folder of this repository. The KeyName and Stack name can be customized but the other parameters have to kept as default when you are configuring the CloudFormation template parameters.
+When you are using the blue green deployment method to deploy your application, please create a new stack in the AWS CloudFormation with the template.yaml file in the cloudformation folder of this repository. The GithubRepoName, KeyName and Stack name can be customized but the other parameters have to kept as default when you are configuring the CloudFormation template parameters.
 
 ![](./images/MLOPS.png)
 The cloud formation will cerate a VPC, a launch configuration file, an autoscaling group, an AWS Codedeploy service and some necessary roles.
