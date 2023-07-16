@@ -230,7 +230,6 @@ For example, you can use it to refer to the secret variables you stored in the G
 ```
 
 
-
 # Deploy
 
 The Github Actions will be triggered when the code is pushed to the git repo.
