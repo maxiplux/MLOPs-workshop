@@ -297,7 +297,7 @@ Click on Save changes
 
 Push your code to the Github to trigger the workflow
 
-In order to see if the deployment works, copy the value of the WebappUrl from the cloudformation stack template, enter the value + `/info` in your broweser.
+In order to see if the deployment works, copy the DNS name from the load balancers, enter the value + `/info` in your broweser.
 
 # Clean Up
 - Delete the cloudformation stack in your AWS Console.
