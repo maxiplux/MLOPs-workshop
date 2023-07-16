@@ -2,7 +2,6 @@ name: build, push and deploy
 on:
   push:
     branches:
-      - blue-green-deployment
       - in-place-deployment
   pull_request:
 
