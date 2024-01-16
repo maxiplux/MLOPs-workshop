@@ -72,6 +72,10 @@ And now we can test our application using Docker
 
 `$ docker run -p 8000:8000 from_ds_to_mlops`
 
+URL: 
+`localhost:8000/info`
+`localhost:8000/health`
+
 # Test!
 
 Test by using the calls in tests/example_calls.txt from the terminal
