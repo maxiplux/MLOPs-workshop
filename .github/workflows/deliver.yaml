@@ -48,7 +48,7 @@ jobs:
   AWSCodeDeploy-Deploy:
     runs-on: ubuntu-latest
     needs: build
-    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint. ( IAMROLE_GITHUB, WE CAN GET THIS FROM THE CLOUD FORMATION OUTPUT)
     permissions:
       id-token: write
       contents: read
